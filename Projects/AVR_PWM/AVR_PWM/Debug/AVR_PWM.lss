@@ -1,0 +1,293 @@
+
+AVR_PWM.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         000001da  00000000  00000000  00000054  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .stab         000006cc  00000000  00000000  00000230  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  2 .stabstr      00000085  00000000  00000000  000008fc  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  3 .debug_aranges 00000020  00000000  00000000  00000981  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  4 .debug_pubnames 0000002a  00000000  00000000  000009a1  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   000000c3  00000000  00000000  000009cb  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 00000074  00000000  00000000  00000a8e  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   0000015f  00000000  00000000  00000b02  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  00000030  00000000  00000000  00000c64  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    000000a5  00000000  00000000  00000c94  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_pubtypes 0000002b  00000000  00000000  00000d39  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 2a 00 	jmp	0x54	; 0x54 <__ctors_end>
+   4:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+   8:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+   c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  10:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  14:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  18:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  1c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  20:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  24:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  28:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  2c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  30:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  34:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  38:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  3c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  40:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  44:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  48:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  4c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  50:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+
+00000054 <__ctors_end>:
+  54:	11 24       	eor	r1, r1
+  56:	1f be       	out	0x3f, r1	; 63
+  58:	cf e5       	ldi	r28, 0x5F	; 95
+  5a:	d4 e0       	ldi	r29, 0x04	; 4
+  5c:	de bf       	out	0x3e, r29	; 62
+  5e:	cd bf       	out	0x3d, r28	; 61
+  60:	0e 94 84 00 	call	0x108	; 0x108 <main>
+  64:	0c 94 eb 00 	jmp	0x1d6	; 0x1d6 <_exit>
+
+00000068 <__bad_interrupt>:
+  68:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+0000006c <change_pwm>:
+#define duty_cycle 50 // duty cycle require
+#define prescaler 8
+
+
+void change_pwm(unsigned int cnl_A, unsigned int cnl_B)
+{
+  6c:	df 93       	push	r29
+  6e:	cf 93       	push	r28
+  70:	00 d0       	rcall	.+0      	; 0x72 <change_pwm+0x6>
+  72:	00 d0       	rcall	.+0      	; 0x74 <change_pwm+0x8>
+  74:	cd b7       	in	r28, 0x3d	; 61
+  76:	de b7       	in	r29, 0x3e	; 62
+  78:	9a 83       	std	Y+2, r25	; 0x02
+  7a:	89 83       	std	Y+1, r24	; 0x01
+  7c:	7c 83       	std	Y+4, r23	; 0x04
+  7e:	6b 83       	std	Y+3, r22	; 0x03
+	if(cnl_A <= 100 && cnl_B <= 100)
+  80:	89 81       	ldd	r24, Y+1	; 0x01
+  82:	9a 81       	ldd	r25, Y+2	; 0x02
+  84:	85 36       	cpi	r24, 0x65	; 101
+  86:	91 05       	cpc	r25, r1
+  88:	f0 f4       	brcc	.+60     	; 0xc6 <change_pwm+0x5a>
+  8a:	8b 81       	ldd	r24, Y+3	; 0x03
+  8c:	9c 81       	ldd	r25, Y+4	; 0x04
+  8e:	85 36       	cpi	r24, 0x65	; 101
+  90:	91 05       	cpc	r25, r1
+  92:	c8 f4       	brcc	.+50     	; 0xc6 <change_pwm+0x5a>
+	OCR1A = (int)ICR1*(cnl_A/100); // Set duty cycle
+  94:	2a e4       	ldi	r18, 0x4A	; 74
+  96:	30 e0       	ldi	r19, 0x00	; 0
+  98:	86 e4       	ldi	r24, 0x46	; 70
+  9a:	90 e0       	ldi	r25, 0x00	; 0
+  9c:	dc 01       	movw	r26, r24
+  9e:	ed 91       	ld	r30, X+
+  a0:	fc 91       	ld	r31, X
+  a2:	89 81       	ldd	r24, Y+1	; 0x01
+  a4:	9a 81       	ldd	r25, Y+2	; 0x02
+  a6:	44 e6       	ldi	r20, 0x64	; 100
+  a8:	50 e0       	ldi	r21, 0x00	; 0
+  aa:	ba 01       	movw	r22, r20
+  ac:	0e 94 d7 00 	call	0x1ae	; 0x1ae <__udivmodhi4>
+  b0:	ab 01       	movw	r20, r22
+  b2:	e4 9f       	mul	r30, r20
+  b4:	c0 01       	movw	r24, r0
+  b6:	e5 9f       	mul	r30, r21
+  b8:	90 0d       	add	r25, r0
+  ba:	f4 9f       	mul	r31, r20
+  bc:	90 0d       	add	r25, r0
+  be:	11 24       	eor	r1, r1
+  c0:	f9 01       	movw	r30, r18
+  c2:	91 83       	std	Z+1, r25	; 0x01
+  c4:	80 83       	st	Z, r24
+	OCR1B = (int)ICR1*(cnl_B/100); // Set duty cycle
+  c6:	28 e4       	ldi	r18, 0x48	; 72
+  c8:	30 e0       	ldi	r19, 0x00	; 0
+  ca:	86 e4       	ldi	r24, 0x46	; 70
+  cc:	90 e0       	ldi	r25, 0x00	; 0
+  ce:	dc 01       	movw	r26, r24
+  d0:	ed 91       	ld	r30, X+
+  d2:	fc 91       	ld	r31, X
+  d4:	11 97       	sbiw	r26, 0x01	; 1
+  d6:	8b 81       	ldd	r24, Y+3	; 0x03
+  d8:	9c 81       	ldd	r25, Y+4	; 0x04
+  da:	44 e6       	ldi	r20, 0x64	; 100
+  dc:	50 e0       	ldi	r21, 0x00	; 0
+  de:	ba 01       	movw	r22, r20
+  e0:	0e 94 d7 00 	call	0x1ae	; 0x1ae <__udivmodhi4>
+  e4:	ab 01       	movw	r20, r22
+  e6:	e4 9f       	mul	r30, r20
+  e8:	c0 01       	movw	r24, r0
+  ea:	e5 9f       	mul	r30, r21
+  ec:	90 0d       	add	r25, r0
+  ee:	f4 9f       	mul	r31, r20
+  f0:	90 0d       	add	r25, r0
+  f2:	11 24       	eor	r1, r1
+  f4:	f9 01       	movw	r30, r18
+  f6:	91 83       	std	Z+1, r25	; 0x01
+  f8:	80 83       	st	Z, r24
+}
+  fa:	0f 90       	pop	r0
+  fc:	0f 90       	pop	r0
+  fe:	0f 90       	pop	r0
+ 100:	0f 90       	pop	r0
+ 102:	cf 91       	pop	r28
+ 104:	df 91       	pop	r29
+ 106:	08 95       	ret
+
+00000108 <main>:
+
+int main(void)
+{
+ 108:	df 93       	push	r29
+ 10a:	cf 93       	push	r28
+ 10c:	cd b7       	in	r28, 0x3d	; 61
+ 10e:	de b7       	in	r29, 0x3e	; 62
+	
+	// Initialize 16 bit timer(timer1)
+	// Phase Correct + non inverting + 8 prescaler
+	ICR1 = 50000; // To set pwm_frequency ----------- Here 10 Hz
+ 110:	86 e4       	ldi	r24, 0x46	; 70
+ 112:	90 e0       	ldi	r25, 0x00	; 0
+ 114:	20 e5       	ldi	r18, 0x50	; 80
+ 116:	33 ec       	ldi	r19, 0xC3	; 195
+ 118:	fc 01       	movw	r30, r24
+ 11a:	31 83       	std	Z+1, r19	; 0x01
+ 11c:	20 83       	st	Z, r18
+	TCCR1A = (1<<WGM11)|(1<<COM1A1)|(1<<COM1B1);
+ 11e:	8f e4       	ldi	r24, 0x4F	; 79
+ 120:	90 e0       	ldi	r25, 0x00	; 0
+ 122:	22 ea       	ldi	r18, 0xA2	; 162
+ 124:	fc 01       	movw	r30, r24
+ 126:	20 83       	st	Z, r18
+	TCCR1B = (1<<WGM13)|(1<<CS11);
+ 128:	8e e4       	ldi	r24, 0x4E	; 78
+ 12a:	90 e0       	ldi	r25, 0x00	; 0
+ 12c:	22 e1       	ldi	r18, 0x12	; 18
+ 12e:	fc 01       	movw	r30, r24
+ 130:	20 83       	st	Z, r18
+	DDRD|=(1<<PD4);
+ 132:	81 e3       	ldi	r24, 0x31	; 49
+ 134:	90 e0       	ldi	r25, 0x00	; 0
+ 136:	21 e3       	ldi	r18, 0x31	; 49
+ 138:	30 e0       	ldi	r19, 0x00	; 0
+ 13a:	f9 01       	movw	r30, r18
+ 13c:	20 81       	ld	r18, Z
+ 13e:	20 61       	ori	r18, 0x10	; 16
+ 140:	fc 01       	movw	r30, r24
+ 142:	20 83       	st	Z, r18
+	DDRD|=(1<<PD5);
+ 144:	81 e3       	ldi	r24, 0x31	; 49
+ 146:	90 e0       	ldi	r25, 0x00	; 0
+ 148:	21 e3       	ldi	r18, 0x31	; 49
+ 14a:	30 e0       	ldi	r19, 0x00	; 0
+ 14c:	f9 01       	movw	r30, r18
+ 14e:	20 81       	ld	r18, Z
+ 150:	20 62       	ori	r18, 0x20	; 32
+ 152:	fc 01       	movw	r30, r24
+ 154:	20 83       	st	Z, r18
+	OCR1A = ICR1/2; // Set duty cycle
+ 156:	8a e4       	ldi	r24, 0x4A	; 74
+ 158:	90 e0       	ldi	r25, 0x00	; 0
+ 15a:	26 e4       	ldi	r18, 0x46	; 70
+ 15c:	30 e0       	ldi	r19, 0x00	; 0
+ 15e:	f9 01       	movw	r30, r18
+ 160:	20 81       	ld	r18, Z
+ 162:	31 81       	ldd	r19, Z+1	; 0x01
+ 164:	36 95       	lsr	r19
+ 166:	27 95       	ror	r18
+ 168:	fc 01       	movw	r30, r24
+ 16a:	31 83       	std	Z+1, r19	; 0x01
+ 16c:	20 83       	st	Z, r18
+	OCR1B = ICR1/2; // Set duty cycle
+ 16e:	88 e4       	ldi	r24, 0x48	; 72
+ 170:	90 e0       	ldi	r25, 0x00	; 0
+ 172:	26 e4       	ldi	r18, 0x46	; 70
+ 174:	30 e0       	ldi	r19, 0x00	; 0
+ 176:	f9 01       	movw	r30, r18
+ 178:	20 81       	ld	r18, Z
+ 17a:	31 81       	ldd	r19, Z+1	; 0x01
+ 17c:	36 95       	lsr	r19
+ 17e:	27 95       	ror	r18
+ 180:	fc 01       	movw	r30, r24
+ 182:	31 83       	std	Z+1, r19	; 0x01
+ 184:	20 83       	st	Z, r18
+	//-------------------------------------------------------------
+	
+	DDRB = 0x0F;
+ 186:	87 e3       	ldi	r24, 0x37	; 55
+ 188:	90 e0       	ldi	r25, 0x00	; 0
+ 18a:	2f e0       	ldi	r18, 0x0F	; 15
+ 18c:	fc 01       	movw	r30, r24
+ 18e:	20 83       	st	Z, r18
+	DDRA = 0xFF;
+ 190:	8a e3       	ldi	r24, 0x3A	; 58
+ 192:	90 e0       	ldi	r25, 0x00	; 0
+ 194:	2f ef       	ldi	r18, 0xFF	; 255
+ 196:	fc 01       	movw	r30, r24
+ 198:	20 83       	st	Z, r18
+	PORTA = 0x00;
+ 19a:	8b e3       	ldi	r24, 0x3B	; 59
+ 19c:	90 e0       	ldi	r25, 0x00	; 0
+ 19e:	fc 01       	movw	r30, r24
+ 1a0:	10 82       	st	Z, r1
+	PORTB = 0x0A;
+ 1a2:	88 e3       	ldi	r24, 0x38	; 56
+ 1a4:	90 e0       	ldi	r25, 0x00	; 0
+ 1a6:	2a e0       	ldi	r18, 0x0A	; 10
+ 1a8:	fc 01       	movw	r30, r24
+ 1aa:	20 83       	st	Z, r18
+	while (1)
+	{
+		
+	}
+ 1ac:	ff cf       	rjmp	.-2      	; 0x1ac <main+0xa4>
+
+000001ae <__udivmodhi4>:
+ 1ae:	aa 1b       	sub	r26, r26
+ 1b0:	bb 1b       	sub	r27, r27
+ 1b2:	51 e1       	ldi	r21, 0x11	; 17
+ 1b4:	07 c0       	rjmp	.+14     	; 0x1c4 <__udivmodhi4_ep>
+
+000001b6 <__udivmodhi4_loop>:
+ 1b6:	aa 1f       	adc	r26, r26
+ 1b8:	bb 1f       	adc	r27, r27
+ 1ba:	a6 17       	cp	r26, r22
+ 1bc:	b7 07       	cpc	r27, r23
+ 1be:	10 f0       	brcs	.+4      	; 0x1c4 <__udivmodhi4_ep>
+ 1c0:	a6 1b       	sub	r26, r22
+ 1c2:	b7 0b       	sbc	r27, r23
+
+000001c4 <__udivmodhi4_ep>:
+ 1c4:	88 1f       	adc	r24, r24
+ 1c6:	99 1f       	adc	r25, r25
+ 1c8:	5a 95       	dec	r21
+ 1ca:	a9 f7       	brne	.-22     	; 0x1b6 <__udivmodhi4_loop>
+ 1cc:	80 95       	com	r24
+ 1ce:	90 95       	com	r25
+ 1d0:	bc 01       	movw	r22, r24
+ 1d2:	cd 01       	movw	r24, r26
+ 1d4:	08 95       	ret
+
+000001d6 <_exit>:
+ 1d6:	f8 94       	cli
+
+000001d8 <__stop_program>:
+ 1d8:	ff cf       	rjmp	.-2      	; 0x1d8 <__stop_program>

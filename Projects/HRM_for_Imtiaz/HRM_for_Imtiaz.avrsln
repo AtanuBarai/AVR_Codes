@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# AvrStudio Solution File, Format Version 11.00
+Project("{D1100916-62DA-4D80-A9B4-55A1E7CCEEB3}") = "HRM_for_Imtiaz", "HRM_for_Imtiaz\HRM_for_Imtiaz.avrgccproj", "{D1974DEA-627A-41A2-B8DF-A7A737B142E7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|AVR = Debug|AVR
+		Release|AVR = Release|AVR
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D1974DEA-627A-41A2-B8DF-A7A737B142E7}.Debug|AVR.ActiveCfg = Debug|AVR
+		{D1974DEA-627A-41A2-B8DF-A7A737B142E7}.Debug|AVR.Build.0 = Debug|AVR
+		{D1974DEA-627A-41A2-B8DF-A7A737B142E7}.Release|AVR.ActiveCfg = Release|AVR
+		{D1974DEA-627A-41A2-B8DF-A7A737B142E7}.Release|AVR.Build.0 = Release|AVR
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

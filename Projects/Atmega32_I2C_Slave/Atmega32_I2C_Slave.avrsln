@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# AvrStudio Solution File, Format Version 11.00
+Project("{D1100916-62DA-4D80-A9B4-55A1E7CCEEB3}") = "Atmega32_I2C_Slave", "Atmega32_I2C_Slave\Atmega32_I2C_Slave.avrgccproj", "{98C2F858-8F1F-40ED-A6D7-E647193A4C1F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|AVR = Debug|AVR
+		Release|AVR = Release|AVR
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{98C2F858-8F1F-40ED-A6D7-E647193A4C1F}.Debug|AVR.ActiveCfg = Debug|AVR
+		{98C2F858-8F1F-40ED-A6D7-E647193A4C1F}.Debug|AVR.Build.0 = Debug|AVR
+		{98C2F858-8F1F-40ED-A6D7-E647193A4C1F}.Release|AVR.ActiveCfg = Release|AVR
+		{98C2F858-8F1F-40ED-A6D7-E647193A4C1F}.Release|AVR.Build.0 = Release|AVR
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

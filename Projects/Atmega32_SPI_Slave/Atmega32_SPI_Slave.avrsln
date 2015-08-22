@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# AvrStudio Solution File, Format Version 11.00
+Project("{D1100916-62DA-4D80-A9B4-55A1E7CCEEB3}") = "Atmega32_SPI_Slave", "Atmega32_SPI_Slave\Atmega32_SPI_Slave.avrgccproj", "{DA2FE3F1-71AC-4125-B574-0DE50F347BF2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|AVR = Debug|AVR
+		Release|AVR = Release|AVR
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DA2FE3F1-71AC-4125-B574-0DE50F347BF2}.Debug|AVR.ActiveCfg = Debug|AVR
+		{DA2FE3F1-71AC-4125-B574-0DE50F347BF2}.Debug|AVR.Build.0 = Debug|AVR
+		{DA2FE3F1-71AC-4125-B574-0DE50F347BF2}.Release|AVR.ActiveCfg = Release|AVR
+		{DA2FE3F1-71AC-4125-B574-0DE50F347BF2}.Release|AVR.Build.0 = Release|AVR
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

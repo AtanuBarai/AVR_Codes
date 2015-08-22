@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# AvrStudio Solution File, Format Version 11.00
+Project("{D1100916-62DA-4D80-A9B4-55A1E7CCEEB3}") = "Atmega32", "Atmega32\Atmega32.avrgccproj", "{6C4BE64D-AB09-4766-94F4-11D40A5D4685}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|AVR = Debug|AVR
+		Release|AVR = Release|AVR
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6C4BE64D-AB09-4766-94F4-11D40A5D4685}.Debug|AVR.ActiveCfg = Debug|AVR
+		{6C4BE64D-AB09-4766-94F4-11D40A5D4685}.Debug|AVR.Build.0 = Debug|AVR
+		{6C4BE64D-AB09-4766-94F4-11D40A5D4685}.Release|AVR.ActiveCfg = Release|AVR
+		{6C4BE64D-AB09-4766-94F4-11D40A5D4685}.Release|AVR.Build.0 = Release|AVR
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
